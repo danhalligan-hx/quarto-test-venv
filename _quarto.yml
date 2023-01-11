@@ -1,0 +1,19 @@
+project:
+  type: website
+
+website:
+  title: Quarto demo
+  navbar:
+    left:
+      - href: index.qmd
+        text: R
+      - href: python.qmd
+        text: Python
+
+format:
+  html:
+    theme: yeti
+    toc: true
+
+execute:
+  freeze: auto
