@@ -25,6 +25,12 @@ More sophisticated hosting could be explored if e.g. database backends are requi
 
 For details see the [Virtual Enivronments](https://quarto.org/docs/projects/virtual-environments.html) section of the quarto docs.
 
+### Install quarto
+
+<https://quarto.org/docs/get-started/>
+
+### Setup virtual environments
+
 To setup python environment (`venv`):
 
 ```shell
@@ -69,6 +75,8 @@ renv::restore()
 * Run `quarto render` to build the site.
 * Run `quarto preview` to build the site and preview locally
 * Run `quarto publish gh-pages` to publish to github pages (you need to run once locally).
+
+![Example of executing a python code block in vscode](img/vscode1.png)
 
 ## Links:
 
