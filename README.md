@@ -1,4 +1,4 @@
-# quarto-test
+# quarto-test-venv
 
 Testing quarto for reporting with R / python. The intention here is to explore an option for
 delivering rapid ad hoc analyses via the web in a reproduible and simple way.
@@ -46,12 +46,28 @@ Then restart R session and install required pacakges
 ```R
 renv::install(c("shiny", "jsonlite", "ggplot2", "htmltools", "remotes", "knitr", "rmarkdown", "quarto", "DT"))
 ```
+
+## Reproducing environment
+
+1. Clone the repo
+2. Restore venv:
+
+```shell
+python3 -m venv env
+source env/bin/activate
+python3 -m pip install -r requirements.txt
+```
+
+2. Restore renv:
+
+```R
+renv::restore()
+```
+
 ## Running
 
-* Clone the repo locally
-* Install dependencies to setup environments
 * Run `quarto render` to build the site.
-* Run `quarto preview` to build the site (broken for docker/M1 mac I think).
+* Run `quarto preview` to build the site and preview locally
 * Run `quarto publish gh-pages` to publish to github pages (you need to run once locally).
 
 ## Links:
