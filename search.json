@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "python.html",
-    "href": "python.html",
-    "title": "Matplotlib demo",
-    "section": "",
-    "text": "This page provides a quick demo of using quarto to execute python code (using the jupyter engine).\nFor a demonstration of a line plot on a polar axis, see Figure 1.\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Airquality analysis",
@@ -19,5 +12,12 @@
     "title": "Airquality analysis",
     "section": "Air Quality",
     "text": "Air Quality\nFigure 1 further explores the impact of temperature on ozone level.\n\n\nCode\nlibrary(ggplot2)\nggplot(airquality, aes(Temp, Ozone)) + \n  geom_point() + \n  geom_smooth(method = \"loess\")\n\n\n\n\n\nFigure 1: Temperature and ozone level.\n\n\n\n\nThe data for this analysis are shown below using the DT package in R, an interface to javascript datatables.\n\n\nCode\nlibrary(DT)\ndatatable(airquality)"
+  },
+  {
+    "objectID": "python.html",
+    "href": "python.html",
+    "title": "Matplotlib demo",
+    "section": "",
+    "text": "This page provides a quick demo of using quarto to execute python code (using the jupyter engine).\nFor a demonstration of a line plot on a polar axis, see Figure 1.\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
   }
 ]
