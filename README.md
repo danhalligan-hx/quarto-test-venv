@@ -1,5 +1,7 @@
 # quarto-test-venv
 
+📔 [View report](https://danhalligan-hx.github.io/quarto-test-venv/)
+
 Testing quarto for reporting with R / python. The intention here is to explore an option for
 delivering rapid ad hoc analyses via the web in a reproduible and simple way.
 
