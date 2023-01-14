@@ -19,5 +19,26 @@
     "title": "Matplotlib demo",
     "section": "",
     "text": "This page provides a quick demo of using quarto to execute python code (using the jupyter engine).\nFor a demonstration of a line plot on a polar axis, see Figure 1.\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
+  },
+  {
+    "objectID": "observable.html",
+    "href": "observable.html",
+    "title": "Observable JS",
+    "section": "",
+    "text": "Here we visualise the penguin data in R using plotly.\n\n\n\n\n\n\nFurther interactively can be achieved with observable JS, and we can make the R tibble available to observable using ojs_define.\n\n\n\nWith data available to observable JS, we can generate an interactive plot.\n\nviewof bill_length_min = Inputs.range(\n  [32, 50], \n  {value: 35, step: 1, label: \"Bill length (min):\"}\n)\nviewof islands = Inputs.checkbox(\n  [\"Torgersen\", \"Biscoe\", \"Dream\"], \n  { value: [\"Torgersen\", \"Biscoe\"], \n    label: \"Islands:\"\n  }\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfiltered = transpose(data).filter(function(penguin) {\n  return bill_length_min < penguin.bill_length_mm &&\n         islands.includes(penguin.island);\n})\n\n\n\n\n\n\n\nPlot.rectY(filtered, \n  Plot.binX(\n    {y: \"count\"}, \n    {x: \"body_mass_g\", fill: \"species\", thresholds: 20}\n  ))\n  .plot({\n    facet: {\n      data: filtered,\n      x: \"sex\",\n      y: \"species\",\n      marginRight: 80\n    },\n    marks: [\n      Plot.frame(),\n    ]\n  }\n)"
+  },
+  {
+    "objectID": "shinylive.html",
+    "href": "shinylive.html",
+    "title": "Shinylive",
+    "section": "",
+    "text": "With an extension you can embed Shinylive applications in a Quarto document.\nShinyLive application are built using Python and then compiled to WebAssembly using Pyodide. This allows the full app to be run client side with no need for a shiny server.\nThere are some limitations notably, that big apps or large datasets are impractical to deliver to the client."
+  },
+  {
+    "objectID": "shinylive.html#to-install",
+    "href": "shinylive.html#to-install",
+    "title": "Shinylive",
+    "section": "To install",
+    "text": "To install\npython3 -m pip install shinylive\nquarto install extension quarto-ext/shinylive\n\nEmbedded Shiny application\n#| standalone: true\n#| viewerHeight: 420\nfrom shiny import App, render, ui\nimport numpy as np\nimport matplotlib.pyplot as plt\napp_ui = ui.page_fluid(\n    ui.layout_sidebar(\n        ui.panel_sidebar(\n            ui.input_slider(\"period\", \"Period\", 0.5, 4, 1, step=0.5),\n            ui.input_slider(\"amplitude\", \"Amplitude\", 0, 2, 1, step=0.25),\n            ui.input_slider(\"shift\", \"Phase shift\", 0, 2, 0, step=0.1),\n        ),\n        ui.panel_main(\n            ui.output_plot(\"plot\"),\n        ),\n    ),\n)\ndef server(input, output, session):\n    @output\n    @render.plot(alt=\"Sine wave\")\n    def plot():\n        t = np.arange(0.0, 4.0, 0.01)\n        s = input.amplitude() * np.sin(\n            2 * np.pi / input.period() * (t - input.shift() / 2)\n        )\n        fig, ax = plt.subplots()\n        ax.set_ylim([-2, 2])\n        ax.plot(t, s)\n        ax.grid()\napp = App(app_ui, server)"
   }
 ]

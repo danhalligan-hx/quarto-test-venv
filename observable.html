@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Quarto demo - Observable JS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<script type="ojs-define">
+{"contents":[{"name":"data","value":{"species":["Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap"],"island":["Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Biscoe","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream","Dream"],"bill_length_mm":[39.1,39.5,40.3,null,36.7,39.3,38.9,39.2,34.1,42,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36,44.1,37,39.6,41.1,37.5,36,42.3,39.6,40.1,35,42,34.5,41.4,39,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35,41,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37,39.7,40.2,40.6,32.1,40.7,37.3,39,39.2,36.6,36,37.8,36,41.5,46.1,50,48.7,50,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49,45.5,48.4,45.8,49.3,42,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,null,46.8,50.4,45.2,49.9,46.5,50,51.3,45.4,52.7,45.2,46.1,51.3,46,51.3,46.6,51.7,47,52,45.9,50.5,50.3,58,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51,49.7,47.5,47.6,52,46.9,53.5,49,46.2,50.9,45.5,50.9,50.8,50.1,49,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],"bill_depth_mm":[18.7,17.4,18,null,19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17,21.1,20,18.5,19.3,19.1,18,18.4,18.5,19.7,16.9,18.8,19,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17,18.2,17.1,18,16.2,19.1,16.6,19.4,19,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20,16,20,18.6,18.9,17.2,20,17,19,16.5,20.3,17.7,19.5,20.7,18.3,17,20.5,17,18.6,17.2,19.8,17,18.5,15.9,19,17.6,18.3,17.1,18,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5,13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15,14.3,15.3,15.3,14.2,14.5,17,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16,13.7,15,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15,14.4,15.4,13.9,15,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15,15,15.6,15.6,14.8,15,16,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14,17,15,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15,17,15.5,15,13.8,16.1,14.7,15.8,14,15.1,15.2,15.9,15.2,16.3,14.1,16,15.7,16.2,13.7,null,14.3,15.7,14.8,16.1,17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19,18.4,19,17.8,20,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17,19.8,18.1,18.2,19,18.7],"flipper_length_mm":[181,186,195,null,193,190,181,195,193,190,186,180,182,191,198,185,195,197,184,194,174,180,189,185,180,187,183,187,172,180,178,178,188,184,195,196,190,180,181,184,182,195,186,196,185,190,182,179,190,191,186,188,190,200,187,191,186,193,181,194,185,195,185,192,184,192,195,188,190,198,190,190,196,197,190,195,191,184,187,195,189,196,187,193,191,194,190,189,189,190,202,205,185,186,187,208,190,196,178,192,192,203,183,190,193,184,199,190,181,197,198,191,193,197,191,196,188,199,189,189,187,198,176,202,186,199,191,195,191,210,190,197,193,199,187,190,191,200,185,193,193,187,188,190,192,185,190,184,195,193,187,201,211,230,210,218,215,210,211,219,209,215,214,216,214,213,210,217,210,221,209,222,218,215,213,215,215,215,216,215,210,220,222,209,207,230,220,220,213,219,208,208,208,225,210,216,222,217,210,225,213,215,210,220,210,225,217,220,208,220,208,224,208,221,214,231,219,230,214,229,220,223,216,221,221,217,216,230,209,220,215,223,212,221,212,224,212,228,218,218,212,230,218,228,212,224,214,226,216,222,203,225,219,228,215,228,216,215,210,219,208,209,216,229,213,230,217,230,217,222,214,null,215,222,212,213,192,196,193,188,197,198,178,197,195,198,193,194,185,201,190,201,197,181,190,195,181,191,187,193,195,197,200,200,191,205,187,201,187,203,195,199,195,210,192,205,210,187,196,196,196,201,190,212,187,198,199,201,193,203,187,197,191,203,202,194,206,189,195,207,202,193,210,198],"body_mass_g":[3750,3800,3250,null,3450,3650,3625,4675,3475,4250,3300,3700,3200,3800,4400,3700,3450,4500,3325,4200,3400,3600,3800,3950,3800,3800,3550,3200,3150,3950,3250,3900,3300,3900,3325,4150,3950,3550,3300,4650,3150,3900,3100,4400,3000,4600,3425,2975,3450,4150,3500,4300,3450,4050,2900,3700,3550,3800,2850,3750,3150,4400,3600,4050,2850,3950,3350,4100,3050,4450,3600,3900,3550,4150,3700,4250,3700,3900,3550,4000,3200,4700,3800,4200,3350,3550,3800,3500,3950,3600,3550,4300,3400,4450,3300,4300,3700,4350,2900,4100,3725,4725,3075,4250,2925,3550,3750,3900,3175,4775,3825,4600,3200,4275,3900,4075,2900,3775,3350,3325,3150,3500,3450,3875,3050,4000,3275,4300,3050,4000,3325,3500,3500,4475,3425,3900,3175,3975,3400,4250,3400,3475,3050,3725,3000,3650,4250,3475,3450,3750,3700,4000,4500,5700,4450,5700,5400,4550,4800,5200,4400,5150,4650,5550,4650,5850,4200,5850,4150,6300,4800,5350,5700,5000,4400,5050,5000,5100,4100,5650,4600,5550,5250,4700,5050,6050,5150,5400,4950,5250,4350,5350,3950,5700,4300,4750,5550,4900,4200,5400,5100,5300,4850,5300,4400,5000,4900,5050,4300,5000,4450,5550,4200,5300,4400,5650,4700,5700,4650,5800,4700,5550,4750,5000,5100,5200,4700,5800,4600,6000,4750,5950,4625,5450,4725,5350,4750,5600,4600,5300,4875,5550,4950,5400,4750,5650,4850,5200,4925,4875,4625,5250,4850,5600,4975,5500,4725,5500,4700,5500,4575,5500,5000,5950,4650,5500,4375,5850,4875,6000,4925,null,4850,5750,5200,5400,3500,3900,3650,3525,3725,3950,3250,3750,4150,3700,3800,3775,3700,4050,3575,4050,3300,3700,3450,4400,3600,3400,2900,3800,3300,4150,3400,3800,3700,4550,3200,4300,3350,4100,3600,3900,3850,4800,2700,4500,3950,3650,3550,3500,3675,4450,3400,4300,3250,3675,3325,3950,3600,4050,3350,3450,3250,4050,3800,3525,3950,3650,3650,4000,3400,3775,4100,3775],"sex":["male","female","female",null,"female","male","female","male",null,null,null,null,"female","male","male","female","female","male","female","male","female","male","female","male","male","female","male","female","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","male",null,"female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male",null,"male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male",null,"male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male",null,"male","female","male","female","male","female","male","female","male","female","male",null,"male","female",null,"female","male","female","male","female","male","male","female","male","female","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","male","female","female","male","female","male","male","female","male","female","female","male","female","male","male","female","female","male","female","male","female","male","female","male","male","female","male","female","female","male","female","male","male","female"],"year":[2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009]}}]}
+</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Quarto demo</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html">
+ <span class="menu-text">R</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./python.html">
+ <span class="menu-text">Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./observable.html" aria-current="page">
+ <span class="menu-text">ObservableJS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./shinylive.html">
+ <span class="menu-text">ShinyLive</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Observable JS</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<p>Here we visualise the penguin data in R using plotly.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-392f0acc6bf1b94a8434" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-392f0acc6bf1b94a8434">{"x":{"data":[{"x":[181,186,195,193,190,181,195,193,190,186,180,182,191,198,185,195,197,184,194,174,180,189,185,180,187,183,187,172,180,178,178,188,184,195,196,190,180,181,184,182,195,186,196,185,190,182,179,190,191,186,188,190,200,187,191,186,193,181,194,185,195,185,192,184,192,195,188,190,198,190,190,196,197,190,195,191,184,187,195,189,196,187,193,191,194,190,189,189,190,202,205,185,186,187,208,190,196,178,192,192,203,183,190,193,184,199,190,181,197,198,191,193,197,191,196,188,199,189,189,187,198,176,202,186,199,191,195,191,210,190,197,193,199,187,190,191,200,185,193,193,187,188,190,192,185,190,184,195,193,187,201],"y":[3750,3800,3250,3450,3650,3625,4675,3475,4250,3300,3700,3200,3800,4400,3700,3450,4500,3325,4200,3400,3600,3800,3950,3800,3800,3550,3200,3150,3950,3250,3900,3300,3900,3325,4150,3950,3550,3300,4650,3150,3900,3100,4400,3000,4600,3425,2975,3450,4150,3500,4300,3450,4050,2900,3700,3550,3800,2850,3750,3150,4400,3600,4050,2850,3950,3350,4100,3050,4450,3600,3900,3550,4150,3700,4250,3700,3900,3550,4000,3200,4700,3800,4200,3350,3550,3800,3500,3950,3600,3550,4300,3400,4450,3300,4300,3700,4350,2900,4100,3725,4725,3075,4250,2925,3550,3750,3900,3175,4775,3825,4600,3200,4275,3900,4075,2900,3775,3350,3325,3150,3500,3450,3875,3050,4000,3275,4300,3050,4000,3325,3500,3500,4475,3425,3900,3175,3975,3400,4250,3400,3475,3050,3725,3000,3650,4250,3475,3450,3750,3700,4000],"text":["flipper_length_mm: 181<br />body_mass_g: 3750<br />species: Adelie<br />species: Adelie","flipper_length_mm: 186<br />body_mass_g: 3800<br />species: Adelie<br />species: Adelie","flipper_length_mm: 195<br />body_mass_g: 3250<br />species: Adelie<br />species: Adelie","flipper_length_mm: 193<br />body_mass_g: 3450<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3650<br />species: Adelie<br />species: Adelie","flipper_length_mm: 181<br />body_mass_g: 3625<br />species: Adelie<br />species: Adelie","flipper_length_mm: 195<br />body_mass_g: 4675<br />species: Adelie<br />species: Adelie","flipper_length_mm: 193<br />body_mass_g: 3475<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 4250<br />species: Adelie<br />species: Adelie","flipper_length_mm: 186<br />body_mass_g: 3300<br />species: Adelie<br />species: Adelie","flipper_length_mm: 180<br />body_mass_g: 3700<br />species: Adelie<br />species: Adelie","flipper_length_mm: 182<br />body_mass_g: 3200<br />species: Adelie<br />species: Adelie","flipper_length_mm: 191<br />body_mass_g: 3800<br />species: Adelie<br />species: Adelie","flipper_length_mm: 198<br />body_mass_g: 4400<br />species: Adelie<br />species: Adelie","flipper_length_mm: 185<br />body_mass_g: 3700<br />species: Adelie<br />species: Adelie","flipper_length_mm: 195<br />body_mass_g: 3450<br />species: Adelie<br />species: Adelie","flipper_length_mm: 197<br />body_mass_g: 4500<br />species: Adelie<br />species: Adelie","flipper_length_mm: 184<br />body_mass_g: 3325<br />species: Adelie<br />species: Adelie","flipper_length_mm: 194<br />body_mass_g: 4200<br />species: Adelie<br />species: Adelie","flipper_length_mm: 174<br />body_mass_g: 3400<br />species: Adelie<br />species: Adelie","flipper_length_mm: 180<br />body_mass_g: 3600<br />species: Adelie<br />species: Adelie","flipper_length_mm: 189<br />body_mass_g: 3800<br />species: Adelie<br />species: Adelie","flipper_length_mm: 185<br />body_mass_g: 3950<br />species: Adelie<br />species: Adelie","flipper_length_mm: 180<br />body_mass_g: 3800<br />species: Adelie<br />species: Adelie","flipper_length_mm: 187<br />body_mass_g: 3800<br />species: Adelie<br />species: Adelie","flipper_length_mm: 183<br />body_mass_g: 3550<br />species: Adelie<br />species: Adelie","flipper_length_mm: 187<br />body_mass_g: 3200<br />species: Adelie<br />species: Adelie","flipper_length_mm: 172<br />body_mass_g: 3150<br />species: Adelie<br />species: Adelie","flipper_length_mm: 180<br />body_mass_g: 3950<br />species: Adelie<br />species: Adelie","flipper_length_mm: 178<br />body_mass_g: 3250<br />species: Adelie<br />species: Adelie","flipper_length_mm: 178<br />body_mass_g: 3900<br />species: Adelie<br />species: Adelie","flipper_length_mm: 188<br />body_mass_g: 3300<br />species: Adelie<br />species: Adelie","flipper_length_mm: 184<br />body_mass_g: 3900<br />species: Adelie<br />species: Adelie","flipper_length_mm: 195<br />body_mass_g: 3325<br />species: Adelie<br />species: Adelie","flipper_length_mm: 196<br />body_mass_g: 4150<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3950<br />species: Adelie<br />species: Adelie","flipper_length_mm: 180<br />body_mass_g: 3550<br />species: Adelie<br />species: Adelie","flipper_length_mm: 181<br />body_mass_g: 3300<br />species: Adelie<br />species: Adelie","flipper_length_mm: 184<br />body_mass_g: 4650<br />species: Adelie<br />species: Adelie","flipper_length_mm: 182<br />body_mass_g: 3150<br />species: Adelie<br />species: Adelie","flipper_length_mm: 195<br />body_mass_g: 3900<br />species: Adelie<br />species: Adelie","flipper_length_mm: 186<br />body_mass_g: 3100<br />species: Adelie<br />species: Adelie","flipper_length_mm: 196<br />body_mass_g: 4400<br />species: Adelie<br />species: Adelie","flipper_length_mm: 185<br />body_mass_g: 3000<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 4600<br />species: Adelie<br />species: Adelie","flipper_length_mm: 182<br />body_mass_g: 3425<br />species: Adelie<br />species: Adelie","flipper_length_mm: 179<br />body_mass_g: 2975<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3450<br />species: Adelie<br />species: Adelie","flipper_length_mm: 191<br />body_mass_g: 4150<br />species: Adelie<br />species: Adelie","flipper_length_mm: 186<br />body_mass_g: 3500<br />species: Adelie<br />species: Adelie","flipper_length_mm: 188<br />body_mass_g: 4300<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3450<br />species: Adelie<br />species: Adelie","flipper_length_mm: 200<br />body_mass_g: 4050<br />species: Adelie<br />species: Adelie","flipper_length_mm: 187<br />body_mass_g: 2900<br />species: Adelie<br />species: Adelie","flipper_length_mm: 191<br />body_mass_g: 3700<br />species: Adelie<br />species: Adelie","flipper_length_mm: 186<br />body_mass_g: 3550<br />species: Adelie<br />species: Adelie","flipper_length_mm: 193<br />body_mass_g: 3800<br />species: Adelie<br />species: Adelie","flipper_length_mm: 181<br />body_mass_g: 2850<br />species: Adelie<br />species: Adelie","flipper_length_mm: 194<br />body_mass_g: 3750<br />species: Adelie<br />species: Adelie","flipper_length_mm: 185<br />body_mass_g: 3150<br />species: Adelie<br />species: Adelie","flipper_length_mm: 195<br />body_mass_g: 4400<br />species: Adelie<br />species: Adelie","flipper_length_mm: 185<br />body_mass_g: 3600<br />species: Adelie<br />species: Adelie","flipper_length_mm: 192<br />body_mass_g: 4050<br />species: Adelie<br />species: Adelie","flipper_length_mm: 184<br />body_mass_g: 2850<br />species: Adelie<br />species: Adelie","flipper_length_mm: 192<br />body_mass_g: 3950<br />species: Adelie<br />species: Adelie","flipper_length_mm: 195<br />body_mass_g: 3350<br />species: Adelie<br />species: Adelie","flipper_length_mm: 188<br />body_mass_g: 4100<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3050<br />species: Adelie<br />species: Adelie","flipper_length_mm: 198<br />body_mass_g: 4450<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3600<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3900<br />species: Adelie<br />species: Adelie","flipper_length_mm: 196<br />body_mass_g: 3550<br />species: Adelie<br />species: Adelie","flipper_length_mm: 197<br />body_mass_g: 4150<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3700<br />species: Adelie<br />species: Adelie","flipper_length_mm: 195<br />body_mass_g: 4250<br />species: Adelie<br />species: Adelie","flipper_length_mm: 191<br />body_mass_g: 3700<br />species: Adelie<br />species: Adelie","flipper_length_mm: 184<br />body_mass_g: 3900<br />species: Adelie<br />species: Adelie","flipper_length_mm: 187<br />body_mass_g: 3550<br />species: Adelie<br />species: Adelie","flipper_length_mm: 195<br />body_mass_g: 4000<br />species: Adelie<br />species: Adelie","flipper_length_mm: 189<br />body_mass_g: 3200<br />species: Adelie<br />species: Adelie","flipper_length_mm: 196<br />body_mass_g: 4700<br />species: Adelie<br />species: Adelie","flipper_length_mm: 187<br />body_mass_g: 3800<br />species: Adelie<br />species: Adelie","flipper_length_mm: 193<br />body_mass_g: 4200<br />species: Adelie<br />species: Adelie","flipper_length_mm: 191<br />body_mass_g: 3350<br />species: Adelie<br />species: Adelie","flipper_length_mm: 194<br />body_mass_g: 3550<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3800<br />species: Adelie<br />species: Adelie","flipper_length_mm: 189<br />body_mass_g: 3500<br />species: Adelie<br />species: Adelie","flipper_length_mm: 189<br />body_mass_g: 3950<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3600<br />species: Adelie<br />species: Adelie","flipper_length_mm: 202<br />body_mass_g: 3550<br />species: Adelie<br />species: Adelie","flipper_length_mm: 205<br />body_mass_g: 4300<br />species: Adelie<br />species: Adelie","flipper_length_mm: 185<br />body_mass_g: 3400<br />species: Adelie<br />species: Adelie","flipper_length_mm: 186<br />body_mass_g: 4450<br />species: Adelie<br />species: Adelie","flipper_length_mm: 187<br />body_mass_g: 3300<br />species: Adelie<br />species: Adelie","flipper_length_mm: 208<br />body_mass_g: 4300<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3700<br />species: Adelie<br />species: Adelie","flipper_length_mm: 196<br />body_mass_g: 4350<br />species: Adelie<br />species: Adelie","flipper_length_mm: 178<br />body_mass_g: 2900<br />species: Adelie<br />species: Adelie","flipper_length_mm: 192<br />body_mass_g: 4100<br />species: Adelie<br />species: Adelie","flipper_length_mm: 192<br />body_mass_g: 3725<br />species: Adelie<br />species: Adelie","flipper_length_mm: 203<br />body_mass_g: 4725<br />species: Adelie<br />species: Adelie","flipper_length_mm: 183<br />body_mass_g: 3075<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 4250<br />species: Adelie<br />species: Adelie","flipper_length_mm: 193<br />body_mass_g: 2925<br />species: Adelie<br />species: Adelie","flipper_length_mm: 184<br />body_mass_g: 3550<br />species: Adelie<br />species: Adelie","flipper_length_mm: 199<br />body_mass_g: 3750<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3900<br />species: Adelie<br />species: Adelie","flipper_length_mm: 181<br />body_mass_g: 3175<br />species: Adelie<br />species: Adelie","flipper_length_mm: 197<br />body_mass_g: 4775<br />species: Adelie<br />species: Adelie","flipper_length_mm: 198<br />body_mass_g: 3825<br />species: Adelie<br />species: Adelie","flipper_length_mm: 191<br />body_mass_g: 4600<br />species: Adelie<br />species: Adelie","flipper_length_mm: 193<br />body_mass_g: 3200<br />species: Adelie<br />species: Adelie","flipper_length_mm: 197<br />body_mass_g: 4275<br />species: Adelie<br />species: Adelie","flipper_length_mm: 191<br />body_mass_g: 3900<br />species: Adelie<br />species: Adelie","flipper_length_mm: 196<br />body_mass_g: 4075<br />species: Adelie<br />species: Adelie","flipper_length_mm: 188<br />body_mass_g: 2900<br />species: Adelie<br />species: Adelie","flipper_length_mm: 199<br />body_mass_g: 3775<br />species: Adelie<br />species: Adelie","flipper_length_mm: 189<br />body_mass_g: 3350<br />species: Adelie<br />species: Adelie","flipper_length_mm: 189<br />body_mass_g: 3325<br />species: Adelie<br />species: Adelie","flipper_length_mm: 187<br />body_mass_g: 3150<br />species: Adelie<br />species: Adelie","flipper_length_mm: 198<br />body_mass_g: 3500<br />species: Adelie<br />species: Adelie","flipper_length_mm: 176<br />body_mass_g: 3450<br />species: Adelie<br />species: Adelie","flipper_length_mm: 202<br />body_mass_g: 3875<br />species: Adelie<br />species: Adelie","flipper_length_mm: 186<br />body_mass_g: 3050<br />species: Adelie<br />species: Adelie","flipper_length_mm: 199<br />body_mass_g: 4000<br />species: Adelie<br />species: Adelie","flipper_length_mm: 191<br />body_mass_g: 3275<br />species: Adelie<br />species: Adelie","flipper_length_mm: 195<br />body_mass_g: 4300<br />species: Adelie<br />species: Adelie","flipper_length_mm: 191<br />body_mass_g: 3050<br />species: Adelie<br />species: Adelie","flipper_length_mm: 210<br />body_mass_g: 4000<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3325<br />species: Adelie<br />species: Adelie","flipper_length_mm: 197<br />body_mass_g: 3500<br />species: Adelie<br />species: Adelie","flipper_length_mm: 193<br />body_mass_g: 3500<br />species: Adelie<br />species: Adelie","flipper_length_mm: 199<br />body_mass_g: 4475<br />species: Adelie<br />species: Adelie","flipper_length_mm: 187<br />body_mass_g: 3425<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3900<br />species: Adelie<br />species: Adelie","flipper_length_mm: 191<br />body_mass_g: 3175<br />species: Adelie<br />species: Adelie","flipper_length_mm: 200<br />body_mass_g: 3975<br />species: Adelie<br />species: Adelie","flipper_length_mm: 185<br />body_mass_g: 3400<br />species: Adelie<br />species: Adelie","flipper_length_mm: 193<br />body_mass_g: 4250<br />species: Adelie<br />species: Adelie","flipper_length_mm: 193<br />body_mass_g: 3400<br />species: Adelie<br />species: Adelie","flipper_length_mm: 187<br />body_mass_g: 3475<br />species: Adelie<br />species: Adelie","flipper_length_mm: 188<br />body_mass_g: 3050<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 3725<br />species: Adelie<br />species: Adelie","flipper_length_mm: 192<br />body_mass_g: 3000<br />species: Adelie<br />species: Adelie","flipper_length_mm: 185<br />body_mass_g: 3650<br />species: Adelie<br />species: Adelie","flipper_length_mm: 190<br />body_mass_g: 4250<br />species: Adelie<br />species: Adelie","flipper_length_mm: 184<br />body_mass_g: 3475<br />species: Adelie<br />species: Adelie","flipper_length_mm: 195<br />body_mass_g: 3450<br />species: Adelie<br />species: Adelie","flipper_length_mm: 193<br />body_mass_g: 3750<br />species: Adelie<br />species: Adelie","flipper_length_mm: 187<br />body_mass_g: 3700<br />species: Adelie<br />species: Adelie","flipper_length_mm: 201<br />body_mass_g: 4000<br />species: Adelie<br />species: Adelie"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,140,0,1)","opacity":0.8,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,140,0,1)"}},"hoveron":"points","name":"Adelie","legendgroup":"Adelie","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[192,196,193,188,197,198,178,197,195,198,193,194,185,201,190,201,197,181,190,195,181,191,187,193,195,197,200,200,191,205,187,201,187,203,195,199,195,210,192,205,210,187,196,196,196,201,190,212,187,198,199,201,193,203,187,197,191,203,202,194,206,189,195,207,202,193,210,198],"y":[3500,3900,3650,3525,3725,3950,3250,3750,4150,3700,3800,3775,3700,4050,3575,4050,3300,3700,3450,4400,3600,3400,2900,3800,3300,4150,3400,3800,3700,4550,3200,4300,3350,4100,3600,3900,3850,4800,2700,4500,3950,3650,3550,3500,3675,4450,3400,4300,3250,3675,3325,3950,3600,4050,3350,3450,3250,4050,3800,3525,3950,3650,3650,4000,3400,3775,4100,3775],"text":["flipper_length_mm: 192<br />body_mass_g: 3500<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 196<br />body_mass_g: 3900<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 193<br />body_mass_g: 3650<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 188<br />body_mass_g: 3525<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 197<br />body_mass_g: 3725<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 198<br />body_mass_g: 3950<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 178<br />body_mass_g: 3250<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 197<br />body_mass_g: 3750<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 195<br />body_mass_g: 4150<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 198<br />body_mass_g: 3700<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 193<br />body_mass_g: 3800<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 194<br />body_mass_g: 3775<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 185<br />body_mass_g: 3700<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 201<br />body_mass_g: 4050<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 190<br />body_mass_g: 3575<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 201<br />body_mass_g: 4050<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 197<br />body_mass_g: 3300<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 181<br />body_mass_g: 3700<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 190<br />body_mass_g: 3450<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 195<br />body_mass_g: 4400<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 181<br />body_mass_g: 3600<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 191<br />body_mass_g: 3400<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 187<br />body_mass_g: 2900<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 193<br />body_mass_g: 3800<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 195<br />body_mass_g: 3300<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 197<br />body_mass_g: 4150<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 200<br />body_mass_g: 3400<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 200<br />body_mass_g: 3800<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 191<br />body_mass_g: 3700<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 205<br />body_mass_g: 4550<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 187<br />body_mass_g: 3200<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 201<br />body_mass_g: 4300<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 187<br />body_mass_g: 3350<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 203<br />body_mass_g: 4100<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 195<br />body_mass_g: 3600<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 199<br />body_mass_g: 3900<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 195<br />body_mass_g: 3850<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 210<br />body_mass_g: 4800<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 192<br />body_mass_g: 2700<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 205<br />body_mass_g: 4500<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 210<br />body_mass_g: 3950<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 187<br />body_mass_g: 3650<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 196<br />body_mass_g: 3550<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 196<br />body_mass_g: 3500<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 196<br />body_mass_g: 3675<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 201<br />body_mass_g: 4450<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 190<br />body_mass_g: 3400<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 212<br />body_mass_g: 4300<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 187<br />body_mass_g: 3250<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 198<br />body_mass_g: 3675<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 199<br />body_mass_g: 3325<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 201<br />body_mass_g: 3950<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 193<br />body_mass_g: 3600<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 203<br />body_mass_g: 4050<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 187<br />body_mass_g: 3350<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 197<br />body_mass_g: 3450<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 191<br />body_mass_g: 3250<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 203<br />body_mass_g: 4050<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 202<br />body_mass_g: 3800<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 194<br />body_mass_g: 3525<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 206<br />body_mass_g: 3950<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 189<br />body_mass_g: 3650<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 195<br />body_mass_g: 3650<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 207<br />body_mass_g: 4000<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 202<br />body_mass_g: 3400<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 193<br />body_mass_g: 3775<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 210<br />body_mass_g: 4100<br />species: Chinstrap<br />species: Chinstrap","flipper_length_mm: 198<br />body_mass_g: 3775<br />species: Chinstrap<br />species: Chinstrap"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(160,32,240,1)","opacity":0.8,"size":11.3385826771654,"symbol":"triangle-up","line":{"width":1.88976377952756,"color":"rgba(160,32,240,1)"}},"hoveron":"points","name":"Chinstrap","legendgroup":"Chinstrap","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[211,230,210,218,215,210,211,219,209,215,214,216,214,213,210,217,210,221,209,222,218,215,213,215,215,215,216,215,210,220,222,209,207,230,220,220,213,219,208,208,208,225,210,216,222,217,210,225,213,215,210,220,210,225,217,220,208,220,208,224,208,221,214,231,219,230,214,229,220,223,216,221,221,217,216,230,209,220,215,223,212,221,212,224,212,228,218,218,212,230,218,228,212,224,214,226,216,222,203,225,219,228,215,228,216,215,210,219,208,209,216,229,213,230,217,230,217,222,214,215,222,212,213],"y":[4500,5700,4450,5700,5400,4550,4800,5200,4400,5150,4650,5550,4650,5850,4200,5850,4150,6300,4800,5350,5700,5000,4400,5050,5000,5100,4100,5650,4600,5550,5250,4700,5050,6050,5150,5400,4950,5250,4350,5350,3950,5700,4300,4750,5550,4900,4200,5400,5100,5300,4850,5300,4400,5000,4900,5050,4300,5000,4450,5550,4200,5300,4400,5650,4700,5700,4650,5800,4700,5550,4750,5000,5100,5200,4700,5800,4600,6000,4750,5950,4625,5450,4725,5350,4750,5600,4600,5300,4875,5550,4950,5400,4750,5650,4850,5200,4925,4875,4625,5250,4850,5600,4975,5500,4725,5500,4700,5500,4575,5500,5000,5950,4650,5500,4375,5850,4875,6000,4925,4850,5750,5200,5400],"text":["flipper_length_mm: 211<br />body_mass_g: 4500<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 230<br />body_mass_g: 5700<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 210<br />body_mass_g: 4450<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 218<br />body_mass_g: 5700<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 5400<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 210<br />body_mass_g: 4550<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 211<br />body_mass_g: 4800<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 219<br />body_mass_g: 5200<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 209<br />body_mass_g: 4400<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 5150<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 214<br />body_mass_g: 4650<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 216<br />body_mass_g: 5550<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 214<br />body_mass_g: 4650<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 213<br />body_mass_g: 5850<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 210<br />body_mass_g: 4200<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 217<br />body_mass_g: 5850<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 210<br />body_mass_g: 4150<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 221<br />body_mass_g: 6300<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 209<br />body_mass_g: 4800<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 222<br />body_mass_g: 5350<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 218<br />body_mass_g: 5700<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 5000<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 213<br />body_mass_g: 4400<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 5050<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 5000<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 5100<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 216<br />body_mass_g: 4100<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 5650<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 210<br />body_mass_g: 4600<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 220<br />body_mass_g: 5550<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 222<br />body_mass_g: 5250<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 209<br />body_mass_g: 4700<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 207<br />body_mass_g: 5050<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 230<br />body_mass_g: 6050<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 220<br />body_mass_g: 5150<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 220<br />body_mass_g: 5400<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 213<br />body_mass_g: 4950<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 219<br />body_mass_g: 5250<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 208<br />body_mass_g: 4350<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 208<br />body_mass_g: 5350<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 208<br />body_mass_g: 3950<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 225<br />body_mass_g: 5700<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 210<br />body_mass_g: 4300<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 216<br />body_mass_g: 4750<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 222<br />body_mass_g: 5550<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 217<br />body_mass_g: 4900<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 210<br />body_mass_g: 4200<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 225<br />body_mass_g: 5400<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 213<br />body_mass_g: 5100<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 5300<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 210<br />body_mass_g: 4850<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 220<br />body_mass_g: 5300<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 210<br />body_mass_g: 4400<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 225<br />body_mass_g: 5000<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 217<br />body_mass_g: 4900<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 220<br />body_mass_g: 5050<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 208<br />body_mass_g: 4300<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 220<br />body_mass_g: 5000<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 208<br />body_mass_g: 4450<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 224<br />body_mass_g: 5550<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 208<br />body_mass_g: 4200<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 221<br />body_mass_g: 5300<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 214<br />body_mass_g: 4400<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 231<br />body_mass_g: 5650<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 219<br />body_mass_g: 4700<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 230<br />body_mass_g: 5700<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 214<br />body_mass_g: 4650<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 229<br />body_mass_g: 5800<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 220<br />body_mass_g: 4700<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 223<br />body_mass_g: 5550<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 216<br />body_mass_g: 4750<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 221<br />body_mass_g: 5000<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 221<br />body_mass_g: 5100<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 217<br />body_mass_g: 5200<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 216<br />body_mass_g: 4700<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 230<br />body_mass_g: 5800<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 209<br />body_mass_g: 4600<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 220<br />body_mass_g: 6000<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 4750<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 223<br />body_mass_g: 5950<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 212<br />body_mass_g: 4625<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 221<br />body_mass_g: 5450<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 212<br />body_mass_g: 4725<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 224<br />body_mass_g: 5350<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 212<br />body_mass_g: 4750<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 228<br />body_mass_g: 5600<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 218<br />body_mass_g: 4600<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 218<br />body_mass_g: 5300<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 212<br />body_mass_g: 4875<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 230<br />body_mass_g: 5550<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 218<br />body_mass_g: 4950<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 228<br />body_mass_g: 5400<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 212<br />body_mass_g: 4750<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 224<br />body_mass_g: 5650<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 214<br />body_mass_g: 4850<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 226<br />body_mass_g: 5200<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 216<br />body_mass_g: 4925<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 222<br />body_mass_g: 4875<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 203<br />body_mass_g: 4625<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 225<br />body_mass_g: 5250<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 219<br />body_mass_g: 4850<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 228<br />body_mass_g: 5600<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 4975<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 228<br />body_mass_g: 5500<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 216<br />body_mass_g: 4725<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 5500<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 210<br />body_mass_g: 4700<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 219<br />body_mass_g: 5500<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 208<br />body_mass_g: 4575<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 209<br />body_mass_g: 5500<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 216<br />body_mass_g: 5000<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 229<br />body_mass_g: 5950<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 213<br />body_mass_g: 4650<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 230<br />body_mass_g: 5500<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 217<br />body_mass_g: 4375<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 230<br />body_mass_g: 5850<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 217<br />body_mass_g: 4875<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 222<br />body_mass_g: 6000<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 214<br />body_mass_g: 4925<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 215<br />body_mass_g: 4850<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 222<br />body_mass_g: 5750<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 212<br />body_mass_g: 5200<br />species: Gentoo<br />species: Gentoo","flipper_length_mm: 213<br />body_mass_g: 5400<br />species: Gentoo<br />species: Gentoo"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,139,139,1)","opacity":0.8,"size":11.3385826771654,"symbol":"square","line":{"width":1.88976377952756,"color":"rgba(0,139,139,1)"}},"hoveron":"points","name":"Gentoo","legendgroup":"Gentoo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":48.9497716894977},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Penguin size, Palmer Station LTER","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[169.05,233.95],"tickmode":"array","ticktext":["170","180","190","200","210","220","230"],"tickvals":[170,180,190,200,210,220,230],"categoryorder":"array","categoryarray":["170","180","190","200","210","220","230"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Flipper length (mm)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2520,6480],"tickmode":"array","ticktext":["3000","4000","5000","6000"],"tickvals":[3000,4000,5000,6000],"categoryorder":"array","categoryarray":["3000","4000","5000","6000"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Body mass (g)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Penguin species","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"59ca36973d74":{"x":{},"y":{},"colour":{},"shape":{},"type":"scatter"}},"cur_data":"59ca36973d74","visdat":{"59ca36973d74":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Further interactively can be achieved with observable JS, and we can make the R tibble available to observable using <code>ojs_define</code>.</p>
+<div class="cell">
+
+</div>
+<p>With data available to observable JS, we can generate an interactive plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="44" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 43;"><span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>viewof bill_length_min <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">32</span><span class="op">,</span> <span class="dv">50</span>]<span class="op">,</span> </span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">35</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Bill length (min):"</span>}</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>viewof islands <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">checkbox</span>(</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  [<span class="st">"Torgersen"</span><span class="op">,</span> <span class="st">"Biscoe"</span><span class="op">,</span> <span class="st">"Dream"</span>]<span class="op">,</span> </span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">value</span><span class="op">:</span> [<span class="st">"Torgersen"</span><span class="op">,</span> <span class="st">"Biscoe"</span>]<span class="op">,</span> </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Islands:"</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="56" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 55;"><span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>filtered <span class="op">=</span> <span class="fu">transpose</span>(data)<span class="op">.</span><span class="fu">filter</span>(<span class="kw">function</span>(penguin) {</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> bill_length_min <span class="op">&lt;</span> penguin<span class="op">.</span><span class="at">bill_length_mm</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>         islands<span class="op">.</span><span class="fu">includes</span>(penguin<span class="op">.</span><span class="at">island</span>)<span class="op">;</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="63" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 62;"><span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">rectY</span>(filtered<span class="op">,</span> </span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>  Plot<span class="op">.</span><span class="fu">binX</span>(</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    {<span class="dt">y</span><span class="op">:</span> <span class="st">"count"</span>}<span class="op">,</span> </span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    {<span class="dt">x</span><span class="op">:</span> <span class="st">"body_mass_g"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"species"</span><span class="op">,</span> <span class="dt">thresholds</span><span class="op">:</span> <span class="dv">20</span>}</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    <span class="dt">facet</span><span class="op">:</span> {</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>      <span class="dt">data</span><span class="op">:</span> filtered<span class="op">,</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"sex"</span><span class="op">,</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"species"</span><span class="op">,</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>      <span class="dt">marginRight</span><span class="op">:</span> <span class="dv">80</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">frame</span>()<span class="op">,</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"viewof bill_length_min = Inputs.range(\n  [32, 50], \n  {value: 35, step: 1, label: \"Bill length (min):\"}\n)\nviewof islands = Inputs.checkbox(\n  [\"Torgersen\", \"Biscoe\", \"Dream\"], \n  { value: [\"Torgersen\", \"Biscoe\"], \n    label: \"Islands:\"\n  }\n)\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"filtered = transpose(data).filter(function(penguin) {\n  return bill_length_min < penguin.bill_length_mm &&\n         islands.includes(penguin.island);\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"Plot.rectY(filtered, \n  Plot.binX(\n    {y: \"count\"}, \n    {x: \"body_mass_g\", fill: \"species\", thresholds: 20}\n  ))\n  .plot({\n    facet: {\n      data: filtered,\n      x: \"sex\",\n      y: \"species\",\n      marginRight: 80\n    },\n    marks: [\n      Plot.frame(),\n    ]\n  }\n)\n"},{"methodName":"interpretQuiet","source":"shinyInput('bill_length_min')"},{"methodName":"interpretQuiet","source":"shinyInput('islands')"}]}
+</script>
+<script type="module">
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -2,10 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/danhalligan-hx/quarto-test-venv/index.html</loc>
-    <lastmod>2023-01-13T15:45:14.737Z</lastmod>
+    <lastmod>2023-01-14T12:07:08.868Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/danhalligan-hx/quarto-test-venv/python.html</loc>
-    <lastmod>2023-01-13T15:45:15.425Z</lastmod>
+    <lastmod>2023-01-14T12:07:09.544Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/danhalligan-hx/quarto-test-venv/observable.html</loc>
+    <lastmod>2023-01-14T12:07:10.104Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/danhalligan-hx/quarto-test-venv/shinylive.html</loc>
+    <lastmod>2023-01-14T12:07:18.112Z</lastmod>
   </url>
 </urlset>
