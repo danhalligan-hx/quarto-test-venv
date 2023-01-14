@@ -9,6 +9,10 @@ website:
         text: R
       - href: python.qmd
         text: Python
+      - href: observable.qmd
+        text: ObservableJS
+      - href: shinylive.qmd
+        text: ShinyLive
 
 format:
   html:
