@@ -10,13 +10,13 @@ website:
       - href: python.qmd
         text: Python
       - href: observable.qmd
-        text: ObservableJS
+        text: Plotly/ObservableJS
       - href: shinylive.qmd
         text: ShinyLive
 
 format:
   html:
-    theme: yeti
+    theme: cosmo
     toc: true
 
 execute:

@@ -11,7 +11,8 @@ library(tidyverse)
 library(plotly)
 ```
 
-Here we visualise the penguin data in R using plotly.
+Here we visualise the [palmer penguins](https://allisonhorst.github.io/palmerpenguins/) 
+data in R using plotly.
 
 
 ```{r}
